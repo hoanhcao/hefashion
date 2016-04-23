@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MyStoreModelStoreContainer" CdmEntityContainer="MyStoreEntities">
+    <EntitySetMapping Name="Order_Items">
+      <EntityTypeMapping TypeName="IsTypeOf(MyStoreModel.Order_Items)">
+        <MappingFragment StoreEntitySet="Order_Items">
+          <ScalarProperty Name="order_item_amount" ColumnName="order_item_amount" />
+          <ScalarProperty Name="order_item_id" ColumnName="order_item_id" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="order_item_status_id" ColumnName="order_item_status_id" />
+          <ScalarProperty Name="order_item_quantity" ColumnName="order_item_quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Status_Codes">
+      <EntityTypeMapping TypeName="IsTypeOf(MyStoreModel.Order_Status_Codes)">
+        <MappingFragment StoreEntitySet="Order_Status_Codes">
+          <ScalarProperty Name="order_status_id" ColumnName="order_status_id" />
+          <ScalarProperty Name="order_status_description" ColumnName="order_status_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(MyStoreModel.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="email_address" ColumnName="email_address" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+          <ScalarProperty Name="order_address" ColumnName="order_address" />
+          <ScalarProperty Name="receipter_name" ColumnName="receipter_name" />
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="order_status_id" ColumnName="order_status_id" />
+          <ScalarProperty Name="date_order_placed" ColumnName="date_order_placed" />
+          <ScalarProperty Name="order_description" ColumnName="order_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(MyStoreModel.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="other_detail" ColumnName="other_detail" />
+          <ScalarProperty Name="product_quantity" ColumnName="product_quantity" />
+          <ScalarProperty Name="product_created_date" ColumnName="product_created_date" />
+          <ScalarProperty Name="product_image" ColumnName="product_image" />
+          <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="product_type_id" ColumnName="product_type_id" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="product_uom_id" ColumnName="product_uom_id" />
+          <ScalarProperty Name="product_description" ColumnName="product_description" />
+          <ScalarProperty Name="product_price" ColumnName="product_price" />
+          <ScalarProperty Name="product_color" ColumnName="product_color" />
+          <ScalarProperty Name="product_size" ColumnName="product_size" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Order_Item_Status_Codes">
+      <EntityTypeMapping TypeName="IsTypeOf(MyStoreModel.Ref_Order_Item_Status_Codes)">
+        <MappingFragment StoreEntitySet="Ref_Order_Item_Status_Codes">
+          <ScalarProperty Name="order_item_status_id" ColumnName="order_item_status_id" />
+          <ScalarProperty Name="order_item_status_description" ColumnName="order_item_status_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Product_Type">
+      <EntityTypeMapping TypeName="IsTypeOf(MyStoreModel.Ref_Product_Type)">
+        <MappingFragment StoreEntitySet="Ref_Product_Type">
+          <ScalarProperty Name="product_type_id" ColumnName="product_type_id" />
+          <ScalarProperty Name="parent_product_type_id" ColumnName="parent_product_type_id" />
+          <ScalarProperty Name="product_type_description_vn" ColumnName="product_type_description_vn" />
+          <ScalarProperty Name="product_type_description_en" ColumnName="product_type_description_en" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Unit_Of_Measure">
+      <EntityTypeMapping TypeName="IsTypeOf(MyStoreModel.Unit_Of_Measure)">
+        <MappingFragment StoreEntitySet="Unit_Of_Measure">
+          <ScalarProperty Name="UOM_id" ColumnName="UOM_id" />
+          <ScalarProperty Name="UOM_description" ColumnName="UOM_description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

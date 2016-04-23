@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3e8845f68cba4644a3ea0eb879447357" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="MyStoreModel.Order_Items" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Order_Status_Codes" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Order" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Ref_Order_Item_Status_Codes" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Ref_Product_Type" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyStoreModel.Unit_Of_Measure" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="MyStoreModel.fk_OrderItem_OrderId" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.fk_OrderItem_OrderStatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.fk_OrderItem_ProductId" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.fk_Order_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.fk_Product_ProductType" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.fk_Product_ProductUOM" ManuallyRouted="false" />
+        <AssociationConnector Association="MyStoreModel.fk_Parent_ProductId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

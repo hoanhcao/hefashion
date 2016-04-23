@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyStoreModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MyStoreModelStoreContainer">
+    <EntitySet Name="Order_Items" EntityType="MyStoreModel.Store.Order_Items" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Order_Status_Codes" EntityType="MyStoreModel.Store.Order_Status_Codes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="MyStoreModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="MyStoreModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ref_Order_Item_Status_Codes" EntityType="MyStoreModel.Store.Ref_Order_Item_Status_Codes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Ref_Product_Type" EntityType="MyStoreModel.Store.Ref_Product_Type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Unit_Of_Measure" EntityType="MyStoreModel.Store.Unit_Of_Measure" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Order_Items">
+    <Key>
+      <PropertyRef Name="order_item_id" />
+    </Key>
+    <Property Name="order_item_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="int" Nullable="false" />
+    <Property Name="order_id" Type="int" Nullable="false" />
+    <Property Name="order_item_status_id" Type="int" Nullable="false" />
+    <Property Name="order_item_quantity" Type="float" Nullable="false" />
+    <Property Name="order_item_amount" Type="decimal" />
+  </EntityType>
+  <EntityType Name="Order_Status_Codes">
+    <Key>
+      <PropertyRef Name="order_status_id" />
+    </Key>
+    <Property Name="order_status_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="order_status_description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="int" />
+    <Property Name="order_status_id" Type="int" Nullable="false" />
+    <Property Name="email_address" Type="nvarchar" MaxLength="50" />
+    <Property Name="receipter_name" Type="nvarchar" MaxLength="500" />
+    <Property Name="order_address" Type="nvarchar" MaxLength="1000" />
+    <Property Name="phone_number" Type="nvarchar" MaxLength="20" />
+    <Property Name="date_order_placed" Type="datetime" />
+    <Property Name="order_description" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="product_type_id" Type="int" Nullable="false" />
+    <Property Name="product_name" Type="nvarchar" MaxLength="10" />
+    <Property Name="product_uom_id" Type="int" Nullable="false" />
+    <Property Name="product_description" Type="nvarchar(max)" />
+    <Property Name="product_price" Type="decimal" />
+    <Property Name="product_color" Type="nvarchar" MaxLength="100" />
+    <Property Name="product_size" Type="nvarchar" MaxLength="100" />
+    <Property Name="product_image" Type="nvarchar(max)" />
+    <Property Name="product_created_date" Type="date" />
+    <Property Name="product_quantity" Type="float" />
+    <Property Name="other_detail" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Ref_Order_Item_Status_Codes">
+    <Key>
+      <PropertyRef Name="order_item_status_id" />
+    </Key>
+    <Property Name="order_item_status_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="order_item_status_description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Ref_Product_Type">
+    <Key>
+      <PropertyRef Name="product_type_id" />
+    </Key>
+    <Property Name="product_type_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="parent_product_type_id" Type="int" />
+    <Property Name="product_type_description_vn" Type="nvarchar" MaxLength="1000" />
+    <Property Name="product_type_description_en" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="Unit_Of_Measure">
+    <Key>
+      <PropertyRef Name="UOM_id" />
+    </Key>
+    <Property Name="UOM_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UOM_description" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+</Schema>

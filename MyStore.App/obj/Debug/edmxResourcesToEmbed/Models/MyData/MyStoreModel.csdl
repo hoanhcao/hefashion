@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MyStoreModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MyStoreEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Order_Items" EntityType="MyStoreModel.Order_Items" />
+    <EntitySet Name="Order_Status_Codes" EntityType="MyStoreModel.Order_Status_Codes" />
+    <EntitySet Name="Orders" EntityType="MyStoreModel.Order" />
+    <EntitySet Name="Products" EntityType="MyStoreModel.Product" />
+    <EntitySet Name="Ref_Order_Item_Status_Codes" EntityType="MyStoreModel.Ref_Order_Item_Status_Codes" />
+    <EntitySet Name="Ref_Product_Type" EntityType="MyStoreModel.Ref_Product_Type" />
+    <EntitySet Name="Unit_Of_Measure" EntityType="MyStoreModel.Unit_Of_Measure" />
+    <AssociationSet Name="fk_OrderItem_OrderId" Association="MyStoreModel.fk_OrderItem_OrderId">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="Order_Items" EntitySet="Order_Items" />
+    </AssociationSet>
+    <AssociationSet Name="fk_OrderItem_OrderStatusId" Association="MyStoreModel.fk_OrderItem_OrderStatusId">
+      <End Role="Ref_Order_Item_Status_Codes" EntitySet="Ref_Order_Item_Status_Codes" />
+      <End Role="Order_Items" EntitySet="Order_Items" />
+    </AssociationSet>
+    <AssociationSet Name="fk_OrderItem_ProductId" Association="MyStoreModel.fk_OrderItem_ProductId">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Order_Items" EntitySet="Order_Items" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Order_OrderStatus" Association="MyStoreModel.fk_Order_OrderStatus">
+      <End Role="Order_Status_Codes" EntitySet="Order_Status_Codes" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Product_ProductType" Association="MyStoreModel.fk_Product_ProductType">
+      <End Role="Ref_Product_Type" EntitySet="Ref_Product_Type" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Product_ProductUOM" Association="MyStoreModel.fk_Product_ProductUOM">
+      <End Role="Unit_Of_Measure" EntitySet="Unit_Of_Measure" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Parent_ProductId" Association="MyStoreModel.fk_Parent_ProductId">
+      <End Role="Ref_Product_Type" EntitySet="Ref_Product_Type" />
+      <End Role="Ref_Product_Type1" EntitySet="Ref_Product_Type" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Order_Items">
+    <Key>
+      <PropertyRef Name="order_item_id" />
+    </Key>
+    <Property Name="order_item_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="order_id" Type="Int32" Nullable="false" />
+    <Property Name="order_item_status_id" Type="Int32" Nullable="false" />
+    <Property Name="order_item_quantity" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="MyStoreModel.fk_OrderItem_OrderId" FromRole="Order_Items" ToRole="Orders" />
+    <NavigationProperty Name="Ref_Order_Item_Status_Codes" Relationship="MyStoreModel.fk_OrderItem_OrderStatusId" FromRole="Order_Items" ToRole="Ref_Order_Item_Status_Codes" />
+    <NavigationProperty Name="Product" Relationship="MyStoreModel.fk_OrderItem_ProductId" FromRole="Order_Items" ToRole="Products" />
+    <Property Type="Decimal" Name="order_item_amount" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Order_Status_Codes">
+    <Key>
+      <PropertyRef Name="order_status_id" />
+    </Key>
+    <Property Name="order_status_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="order_status_description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Orders" Relationship="MyStoreModel.fk_Order_OrderStatus" FromRole="Order_Status_Codes" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="order_id" />
+    </Key>
+    <Property Name="order_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id" Type="Int32" />
+    <Property Name="order_status_id" Type="Int32" Nullable="false" />
+    <Property Name="date_order_placed" Type="DateTime" Precision="3" />
+    <Property Name="order_description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Order_Items" Relationship="MyStoreModel.fk_OrderItem_OrderId" FromRole="Orders" ToRole="Order_Items" />
+    <NavigationProperty Name="Order_Status_Codes" Relationship="MyStoreModel.fk_Order_OrderStatus" FromRole="Orders" ToRole="Order_Status_Codes" />
+    <Property Type="String" Name="receipter_name" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="order_address" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="phone_number" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="email_address" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="product_id" Type="Int32" Nullable="false" />
+    <Property Name="product_type_id" Type="Int32" Nullable="false" />
+    <Property Name="product_name" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <Property Name="product_uom_id" Type="Int32" Nullable="false" />
+    <Property Name="product_description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="product_price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="product_color" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="product_size" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Order_Items" Relationship="MyStoreModel.fk_OrderItem_ProductId" FromRole="Products" ToRole="Order_Items" />
+    <NavigationProperty Name="Ref_Product_Type" Relationship="MyStoreModel.fk_Product_ProductType" FromRole="Products" ToRole="Ref_Product_Type" />
+    <NavigationProperty Name="Unit_Of_Measure" Relationship="MyStoreModel.fk_Product_ProductUOM" FromRole="Products" ToRole="Unit_Of_Measure" />
+    <Property Type="String" Name="product_image" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="product_created_date" Precision="0" />
+    <Property Type="Double" Name="product_quantity" />
+    <Property Type="String" Name="other_detail" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Ref_Order_Item_Status_Codes">
+    <Key>
+      <PropertyRef Name="order_item_status_id" />
+    </Key>
+    <Property Name="order_item_status_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="order_item_status_description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Order_Items" Relationship="MyStoreModel.fk_OrderItem_OrderStatusId" FromRole="Ref_Order_Item_Status_Codes" ToRole="Order_Items" />
+  </EntityType>
+  <EntityType Name="Ref_Product_Type">
+    <Key>
+      <PropertyRef Name="product_type_id" />
+    </Key>
+    <Property Name="product_type_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="parent_product_type_id" Type="Int32" />
+    <Property Name="product_type_description_vn" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="product_type_description_en" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Products" Relationship="MyStoreModel.fk_Product_ProductType" FromRole="Ref_Product_Type" ToRole="Products" />
+    <NavigationProperty Name="Ref_Product_Type1" Relationship="MyStoreModel.fk_Parent_ProductId" FromRole="Ref_Product_Type" ToRole="Ref_Product_Type1" />
+    <NavigationProperty Name="Ref_Product_Type2" Relationship="MyStoreModel.fk_Parent_ProductId" FromRole="Ref_Product_Type1" ToRole="Ref_Product_Type" />
+  </EntityType>
+  <EntityType Name="Unit_Of_Measure">
+    <Key>
+      <PropertyRef Name="UOM_id" />
+    </Key>
+    <Property Name="UOM_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="UOM_description" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Products" Relationship="MyStoreModel.fk_Product_ProductUOM" FromRole="Unit_Of_Measure" ToRole="Products" />
+  </EntityType>
+  <Association Name="fk_OrderItem_OrderId">
+    <End Role="Orders" Type="MyStoreModel.Order" Multiplicity="1" />
+    <End Role="Order_Items" Type="MyStoreModel.Order_Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="order_id" />
+      </Principal>
+      <Dependent Role="Order_Items">
+        <PropertyRef Name="order_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_OrderItem_OrderStatusId">
+    <End Role="Ref_Order_Item_Status_Codes" Type="MyStoreModel.Ref_Order_Item_Status_Codes" Multiplicity="1" />
+    <End Role="Order_Items" Type="MyStoreModel.Order_Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Order_Item_Status_Codes">
+        <PropertyRef Name="order_item_status_id" />
+      </Principal>
+      <Dependent Role="Order_Items">
+        <PropertyRef Name="order_item_status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_OrderItem_ProductId">
+    <End Role="Products" Type="MyStoreModel.Product" Multiplicity="1" />
+    <End Role="Order_Items" Type="MyStoreModel.Order_Items" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="product_id" />
+      </Principal>
+      <Dependent Role="Order_Items">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Order_OrderStatus">
+    <End Role="Order_Status_Codes" Type="MyStoreModel.Order_Status_Codes" Multiplicity="1" />
+    <End Role="Orders" Type="MyStoreModel.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order_Status_Codes">
+        <PropertyRef Name="order_status_id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="order_status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Product_ProductType">
+    <End Role="Ref_Product_Type" Type="MyStoreModel.Ref_Product_Type" Multiplicity="1" />
+    <End Role="Products" Type="MyStoreModel.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Product_Type">
+        <PropertyRef Name="product_type_id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="product_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Product_ProductUOM">
+    <End Role="Unit_Of_Measure" Type="MyStoreModel.Unit_Of_Measure" Multiplicity="1" />
+    <End Role="Products" Type="MyStoreModel.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit_Of_Measure">
+        <PropertyRef Name="UOM_id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="product_uom_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Parent_ProductId">
+    <End Role="Ref_Product_Type" Type="MyStoreModel.Ref_Product_Type" Multiplicity="0..1" />
+    <End Role="Ref_Product_Type1" Type="MyStoreModel.Ref_Product_Type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Product_Type">
+        <PropertyRef Name="product_type_id" />
+      </Principal>
+      <Dependent Role="Ref_Product_Type1">
+        <PropertyRef Name="parent_product_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
